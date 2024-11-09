@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
 df the dataframe
+C: Convert Factor with levels into a dataframe pd.DataFrame(df["Factor"].value_counts()).reset_index(0)
 S: Sort values df.sort_values("column")
 T: Turn series into dataframe pd.DataFrame(Series).reset_index()
