@@ -1,4 +1,4 @@
-#A Humble barchart
+#A Humble barchart (Unordered)
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -15,3 +15,19 @@ plt.ylabel('Count')
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.savefig('my_figure.png', bbox_inches='tight', dpi=300)
+#BAR CHART ORDERED
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+df = pd.read_csv("District_PGI_Table_1.csv")
+fig= plt.figure(figsize=(7, 5))
+plt.title("How have India's districts performed")
+df["Grade"]
+df["Grade"].value_counts()
+df_ranked=pd.DataFrame(df["Grade"].value_counts()).reset_index()#Turn into a dataframe
+df_ranked
+plt.bar(df_ranked["Grade"], df_ranked["count"])
+plt.xlabel('Grade')
+plt.ylabel('Count')
+plt.tight_layout()
+plt.savefig('my_figure1.png', bbox_inches='tight', dpi=300)
