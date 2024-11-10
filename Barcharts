@@ -15,6 +15,7 @@ plt.ylabel('Count')
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.savefig('my_figure.png', bbox_inches='tight', dpi=300)
+
 #BAR CHART ORDERED
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -31,3 +32,18 @@ plt.xlabel('Grade')
 plt.ylabel('Count')
 plt.tight_layout()
 plt.savefig('my_figure1.png', bbox_inches='tight', dpi=300)
+
+#THE DOT PLOT
+df = pd.read_csv("District_PGI_Table_1.csv")
+fig= plt.figure(figsize=(7, 5))
+plt.title("How have India's districts performed")
+df["Grade"]
+df["Grade"].unique()
+categories =['Uttam', 'Prachesta-1', 'Prachesta-2', 'Prachesta-3', 'Akanshi-1', 'Ati-Uttam'] #from df["Grade"].unique()
+counts= df["Grade"].value_counts()[categories].tolist()
+plt.scatter(categories, counts)
+plt.xlabel('Grade')
+plt.ylabel('Count')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('my_figure.png', bbox_inches='tight', dpi=300)
