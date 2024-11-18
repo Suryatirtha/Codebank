@@ -87,3 +87,26 @@ plt.title("How the districts rank")
 plt.pie(df_counts, labels=df_counts.index, autopct='%1.2f%%')
 plt.tight_layout()
 plt.savefig('my_figure1.png', bbox_inches='tight', dpi=300)
+
+# A DONUT CHART
+import pandas as pd
+import matplotlib.pyplot as plt
+fig= plt.figure(figsize=(7, 5))
+plt.title("How the districts rank")
+df = pd.read_csv("District_PGI_Table_1.csv")
+df["Grade"]
+df_counts = df["Grade"].value_counts()
+df_counts
+plt.pie(df_counts, labels=df_counts.index, autopct='%d%%', pctdistance=0.85)
+centre_circle = plt.Circle((0, 0), 0.70, fc='white')
+fig = plt.gcf()
+fig.gca().add_artist(centre_circle)
+plt.axis('equal')
+plt.tight_layout()
+plt.savefig('my_figure1.png', bbox_inches='tight', dpi=300)
+pctdistance=0.85`: Moves the percentage labels closer to the center.
+centre_circle = plt.Circle()`: Creates a white circle at the center.
+`fig.gca().add_artist(centre_circle)`: Adds the circle to the plot.
+`plt.axis('equal')`: Ensures the circle appears as a circle, not an ellipse.
+
+
