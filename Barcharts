@@ -72,3 +72,18 @@ plt.ylabel('Count')
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.savefig('my_figure.png', bbox_inches='tight', dpi=300)
+
+# A PIE CHART 
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+fig= plt.figure(figsize=(7, 5))
+df = pd.read_csv("District_PGI_Table_1.csv")
+df
+df["Grade"]
+df_counts = df["Grade"].value_counts()
+df_counts
+plt.title("How the districts rank")
+plt.pie(df_counts, labels=df_counts.index, autopct='%1.2f%%')
+plt.tight_layout()
+plt.savefig('my_figure1.png', bbox_inches='tight', dpi=300)
