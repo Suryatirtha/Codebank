@@ -109,6 +109,58 @@ centre_circle = plt.Circle()`: Creates a white circle at the center.
 `fig.gca().add_artist(centre_circle)`: Adds the circle to the plot.
 `plt.axis('equal')`: Ensures the circle appears as a circle, not an ellipse.
 
+
+#STACKED VERTICAL BAR CHART
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+df = pd.read_csv("District_PGI_Table_1.csv")
+df_grade_counts = pd.DataFrame(df["Grade"].value_counts()).reset_index()
+df_grade_counts
+
+
+#Series 1 = (Prachesta-1, 290)
+#Series 2 = (Uttam,	271)
+#Series 3 = (Prachesta-2, 117)
+#Series 4 = (Ati-Uttam, 51)
+#Series 5 = (Prachesta-3	18ax = plt.axes()
+
+#Data
+labels = ['Performance']
+sizes1 = [290]
+sizes2 = [271]
+sizes3= [117]
+sizes4= [51]
+sizes5 = [18]
+ax=plt.axes()
+
+x = np.arange(1)
+height1 = sizes1
+height2 = sizes2
+height3 = sizes3
+height4 = sizes4
+height5 = sizes5
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+plt.title("Vertical Stacked Bar Chart")
+ax.bar(x, height1, width=0.1, label = "Prachesta-1")
+ax.bar(x, height2, bottom=height1, width=0.1, label = "Uttam")
+ax.bar(x, height3, bottom=[x + y for x, y in zip(height1, height2)], width=0.1, label = "Prachesta-2")
+ax.bar(x, height4, bottom=[x + y + z for x, y, z in zip(height1, height2, height3)],width=0.1, label = "Ati-Uttam")
+ax.bar(x, height5, bottom=[x + y + z + w for x, y, z, w in zip(height1, height2, height3, height4)], width=0.1, label ="Prachesta-3")
+ax.text(x, height1[0]/2, str(height1[0]), ha='center')
+ax.text(x, height1[0] + height2[0]/2, str(height2[0]), ha='center')
+ax.text(x, height1[0] + height2[0] + height3[0]/2, str(height3[0]), ha='center')
+ax.text(x, height1[0] + height2[0] + height3[0] + height4[0]/2, str(height4[0]), ha='center')
+ax.text(x, height1[0] + height2[0] + height3[0] + height4[0] + height5[0]/2, str(height5[0]), ha='center')
+plt.xlim(-0.5, 0.5)
+plt.legend()
+plt.xlabel("Indicators")
+plt.tight_layout()
+plt.savefig('my_figure2.png', bbox_inches='tight', dpi=300)
+
 # A HORIZONTAL STACKED BAR CHART
 import matplotlib.pyplot as plt
 import numpy as np
