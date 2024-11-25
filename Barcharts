@@ -207,3 +207,25 @@ plt.xlabel("Indicators")
 plt.tight_layout()
 plt.savefig('my_figure1.png', bbox_inches='tight', dpi=300)
 
+# Unordered bar chart with colour
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import brewer2mpl
+# Get a qualitative color map
+bmap = brewer2mpl.get_map('Set1', 'Qualitative', 8)
+df = pd.read_csv("District_PGI_Table_1.csv")
+fig= plt.figure(figsize=(7, 5))
+plt.title("How have India's districts performed")
+df["Grade"]
+df["Grade"].unique()
+categories =['Uttam', 'Prachesta-1', 'Prachesta-2', 'Prachesta-3', 'Akanshi-1', 'Ati-Uttam'] #from df["Grade"].unique()
+counts= df["Grade"].value_counts()[categories].tolist()
+colors = bmap.mpl_colors
+plt.bar(categories, counts, color=[colors[i % len(colors)] for i in range(len(categories))])
+plt.xlabel('Grade')
+plt.ylabel('Count')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('my_figure.png', bbox_inches='tight', dpi=300)
