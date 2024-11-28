@@ -229,3 +229,20 @@ plt.ylabel('Count')
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.savefig('my_figure.png', bbox_inches='tight', dpi=300)
+
+# Ordered Bar Chart With Color Saturation
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import brewer2mpl
+df = pd.read_csv("District_PGI_Table_1.csv")
+bmap = brewer2mpl.get_map('Blues', 'Sequential', 9)
+fig = plt.figure(figsize=(7, 5))
+plt.title("How have India's districts performed")
+colors = bmap.mpl_colors[::-1]
+df_ranked = pd.DataFrame(df["Grade"].value_counts()).reset_index()
+plt.bar(df_ranked["Grade"], df_ranked["count"], color=[colors[i % len(colors)] for i in range(len(df_ranked["Grade"]))])
+plt.xlabel('Grade')
+plt.ylabel('Count')
+plt.tight_layout()
+plt.savefig("my_figure1.png", bbox_inches="tight", dpi=300)
