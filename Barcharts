@@ -246,3 +246,19 @@ plt.xlabel('Grade')
 plt.ylabel('Count')
 plt.tight_layout()
 plt.savefig("my_figure1.png", bbox_inches="tight", dpi=300)
+
+#Bar chart with a divergent colour theme
+import pandas as pd
+import matplotlib.pyplot as plt
+df=pd.DataFrame({"Attribute": ["Sleep", "Anger", "Food", "Desire", "Philosophy", "Game Theory"], "Score": [20,40,60,80,120,130]})
+fig = plt.figure(figsize=(7, 5))
+x=df["Attribute"]
+y=df["Score"]
+import brewer2mpl
+bmap = brewer2mpl.get_map('PRGn', 'Diverging', 6)
+colors = bmap.mpl_colors
+plt.bar(x,y)
+plt.bar(x, y, color=[colors[i % len(colors)] for i in range(len(x))])
+plt.tight_layout()
+plt.savefig('my_figure1.png', bbox_inches='tight', dpi=300)
+plt.show()
