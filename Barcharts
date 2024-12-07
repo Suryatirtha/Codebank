@@ -283,3 +283,23 @@ fig = plt.figure(
     legend={'loc': 'upper left', 'bbox_to_anchor': (1.05, 1)}, figsize=(7, 5))
 plt.title("Arms Imports")
 plt.savefig('my_figure.png', bbox_inches='tight', dpi=300)
+
+#WAFFLE CHART 2
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from pywaffle import Waffle
+df= pd.DataFrame({"Goals": ["Target", "Runs Scored"], "Numbers": [380, 190]}, index = [1,2])
+df = df.sort_values('Numbers')
+df
+
+fig = plt.figure(
+    FigureClass=Waffle,
+    rows=5,
+    columns=5,
+    values=df["Numbers"],
+    labels=list(df["Goals"]),
+    legend={'loc': 'upper left', 'bbox_to_anchor': (1.05, 1)})
+df["Numbers"]
+plt.savefig('my_figure1.png', bbox_inches='tight', dpi=300)
+plt.show()
