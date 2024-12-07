@@ -303,3 +303,33 @@ fig = plt.figure(
 df["Numbers"]
 plt.savefig('my_figure1.png', bbox_inches='tight', dpi=300)
 plt.show()
+
+WAFFLE CHART SHOWING PROGRESS
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from pywaffle import Waffle
+
+# Data
+target = 100
+progress = 75
+target-progress
+
+# Create a waffle chart
+fig = plt.figure(
+    FigureClass=Waffle,
+    rows=10,
+    columns=10,
+    values=[1] * target,
+    labels=["Progress"] * progress + ["Remaining"] * (target - progress),
+    colors=["blue"] * progress + ["gray"] * (target - progress),
+    legend={'loc': 'upper left', 'bbox_to_anchor': (1.05, 1), 
+            'labels': ['Progress', 'Remaining'], 
+            'handles': [plt.Line2D([0], [0], marker='o', color='w', label='Progress', markerfacecolor='blue', markersize=10), 
+                          plt.Line2D([0], [0], marker='o', color='w', label='Remaining', markerfacecolor='gray', markersize=10)]}
+)
+
+plt.title("Progress towards target")
+plt.figtext(0.8, 0.7, f"Completion: {progress}%", ha='center', fontsize=10)
+plt.show()
+plt.savefig('target1.png', bbox_inches='tight', dpi=300)
