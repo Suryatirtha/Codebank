@@ -333,3 +333,35 @@ plt.title("Progress towards target")
 plt.figtext(0.8, 0.7, f"Completion: {progress}%", ha='center', fontsize=10)
 plt.show()
 plt.savefig('target1.png', bbox_inches='tight', dpi=300)
+
+# A TREE MAP
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import squarify
+
+df= pd.read_csv("arms.csv", skiprows=8, on_bad_lines="skip")
+df.columns
+df1 = df[["Recipient", '2020-2022']].head(10)
+df1
+
+plt.title("Top Arms Importers")
+squarify.plot(sizes=df1['2020-2022'], label=df1['Recipient'], alpha=.8 )
+plt.axis('off')
+
+#TREE MAP WITH NUMBERS
+import squarify
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+df= pd.read_csv("arms.csv", skiprows=8, on_bad_lines="skip")
+df.columns
+df1 = df[["Recipient", '2020-2022']].head(10)
+df1
+label= df1['Recipient']
+sizes= df1['2020-2022']
+plt.title("Top Arms Importers")
+squarify.plot(sizes=sizes, label=[f"{label} ({size})" for label, size in zip(label, sizes)], alpha=.8)
+plt.axis('off')
+plt.show()
+
