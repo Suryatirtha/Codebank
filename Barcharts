@@ -364,4 +364,38 @@ plt.title("Top Arms Importers")
 squarify.plot(sizes=sizes, label=[f"{label} ({size})" for label, size in zip(label, sizes)], alpha=.8)
 plt.axis('off')
 plt.show()
+# THE CIRCULAR CHART
+import pandas as pd
+import matplotlib.pyplot as plt
+import circlify
 
+df = pd.read_csv("arms.csv", skiprows=8, on_bad_lines="skip")
+
+df1 = df[["Recipient", '2020-2022']].head(10)
+
+circles = circlify.circlify(
+    df1['2020-2022'].tolist(),
+    show_enclosure=False,
+    target_enclosure=circlify.Circle(x=0, y=0, r=1)
+)
+
+circles = circles[::-1]
+
+fig, ax = plt.subplots(figsize=(5, 5))
+
+lim = max(max(abs(circle.x) + circle.r, abs(circle.y) + circle.r) for circle in circles)
+plt.xlim(-lim, lim)
+plt.ylim(-lim, lim)
+
+# List of colors
+colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#800000', '#008000', '#000080', '#808000']
+
+# Plot the circles with colors
+for circle, label, color in zip(circles, df1['Recipient'], colors):
+    x, y, r = circle
+    ax.add_patch(plt.Circle((x, y), r, alpha=0.5, linewidth=2, color=color, fill=True))
+    plt.annotate(label, (x, y), va='center', ha='center', color='white')
+    plt.title("Top Arms Importers")
+
+plt.axis('off')
+plt.show()
