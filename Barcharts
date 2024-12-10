@@ -416,3 +416,30 @@ plt.axis('off')
 plt.title('Top Arms Importers')
 fig.savefig("Circlify.png")
 
+#BAR CHART WITh COLOURS
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+fig=plt.figure()
+
+df = pd.read_csv("arms.csv", skiprows=8, on_bad_lines="skip")
+df.columns
+df1 = df[["Recipient", '2020-2022']].head(10)
+df1 = df1.sort_values('2020-2022', ascending=False)
+
+plt.title("Top Arms Importing Countries 2020-2022")
+x = df1['Recipient']
+y = df1['2020-2022']
+colors = ['gray'] * len(x)  # colors grey
+colors[0] = 'blue'  # 1st color blue
+
+plt.barh(x, y, color=colors)
+plt.grid(axis='x', linestyle='--', alpha=0.5)
+
+# Invert the y-axis
+plt.gca().invert_yaxis()
+
+fig.savefig("Bar.png")
+
+plt.show()
