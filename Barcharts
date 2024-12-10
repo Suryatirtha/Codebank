@@ -364,26 +364,41 @@ plt.title("Top Arms Importers")
 squarify.plot(sizes=sizes, label=[f"{label} ({size})" for label, size in zip(label, sizes)], alpha=.8)
 plt.axis('off')
 plt.show()
+
 # THE CIRCULAR CHART
-import pandas as pd
-import matplotlib.pyplot as plt
+
+import pandas as pf
+import matplotlib.pyplot
 import circlify
 
-df = pd.read_csv("arms.csv", skiprows=8, on_bad_lines="skip")
-
+df= pd.read_csv("arms.csv", skiprows=8, on_bad_lines="skip")
+df.columns
 df1 = df[["Recipient", '2020-2022']].head(10)
+df1
 
+fig=plt.figure()
 circles = circlify.circlify(
     df1['2020-2022'].tolist(),
     show_enclosure=False,
     target_enclosure=circlify.Circle(x=0, y=0, r=1)
 )
-
 circles = circles[::-1]
 
-fig, ax = plt.subplots(figsize=(5, 5))
+print(circles)
 
-lim = max(max(abs(circle.x) + circle.r, abs(circle.y) + circle.r) for circle in circles)
+print(circles)
+# Create just a figure and only one subplot
+fig, ax = plt.subplots(figsize=(10, 10))
+
+
+# Find axis boundaries
+lim = max(
+    max(
+        abs(circle.x) + circle.r,
+        abs(circle.y) + circle.r,
+    )
+    for circle in circles
+)
 plt.xlim(-lim, lim)
 plt.ylim(-lim, lim)
 
@@ -398,4 +413,6 @@ for circle, label, color in zip(circles, df1['Recipient'], colors):
     plt.title("Top Arms Importers")
 
 plt.axis('off')
-plt.show()
+plt.title('Top Arms Importers')
+fig.savefig("Circlify.png")
+
