@@ -463,7 +463,7 @@ values = values.reshape(1, -1)
 # Create a custom colormap with darker early colors
 cmap = LinearSegmentedColormap.from_list("Custom Reds", ["#FFC080", "#8B0A1A"])
 
-# Create a heatmap
+# CREATE A HEATMAP
 
 fig = plt.figure(figsize=(12, 2))
 sns.heatmap(values, cmap=cmap, fmt=".0f", cbar=False,
