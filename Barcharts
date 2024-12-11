@@ -444,4 +444,33 @@ fig.savefig("Bar.png")
 
 plt.show()
 
+A HEAT MAP
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from matplotlib.colors import LinearSegmentedColormap
 
+df = pd.read_csv("arms.csv", skiprows=8, on_bad_lines="skip")
+
+df1 = df[["Recipient", '2020-2022']].head(10)
+df1.columns
+df1 = df1.sort_values('2020-2022')
+
+values = np.array([2508, 2853, 3187, 3242, 3417, 3613, 3692, 6425, 7334, 9178])
+values = values.reshape(1, -1)
+
+# Create a custom colormap with darker early colors
+cmap = LinearSegmentedColormap.from_list("Custom Reds", ["#FFC080", "#8B0A1A"])
+
+# Create a heatmap
+
+fig = plt.figure(figsize=(12, 2))
+sns.heatmap(values, cmap=cmap, fmt=".0f", cbar=False,
+             xticklabels=df1['Recipient'], yticklabels=False)
+
+# Reversed the xticks
+plt.xticks(range(len(df1)), df1['Recipient'], rotation=90)
+plt.title('Top Arms Importers 2020-22', fontsize=18)
+fig.savefig('fig1.png')
+plt.show()
