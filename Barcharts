@@ -465,12 +465,58 @@ cmap = LinearSegmentedColormap.from_list("Custom Reds", ["#FFC080", "#8B0A1A"])
 
 # CREATE A HEATMAP
 
-fig = plt.figure(figsize=(12, 2))
-sns.heatmap(values, cmap=cmap, fmt=".0f", cbar=False,
-             xticklabels=df1['Recipient'], yticklabels=False)
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.colors import LinearSegmentedColormap
 
-# Reversed the xticks
-plt.xticks(range(len(df1)), df1['Recipient'], rotation=90)
-plt.title('Top Arms Importers 2020-22', fontsize=18)
+# Data
+# Load the dataset
+df = pd.read_csv("arms.csv", skiprows=8, on_bad_lines="skip")
+
+# Select the required columns and top 10 recipients
+df1 = df[["Recipient", '2020-2022']].head(10)
+df1.columns = ["Recipient", "2020-2022"]
+df1 = df1.sort_values("2020-2022")
+df1["Recipient"].unique()
+#array(['South Korea', 'Ukraine', 'Pakistan', 'Kuwait', 'Egypt', 'Japan',
+       #'Australia', 'Qatar', 'Saudi Arabia', 'India']
+df1["2020-2022"].unique()
+#array([2508, 2853, 3187, 3242, 3417, 3613, 3692, 6425, 7334, 9178]
+
+values = np.array([2508, 2853, 3187, 3242, 3417, 3613, 3692, 6425, 7334, 9178])
+recipients = ['South Korea', 'Ukraine', 'Pakistan', 'Kuwait', 'Egypt', 'Japan',
+       'Australia', 'Qatar', 'Saudi Arabia', 'India']
+
+
+#['South Korea', 'Ukraine', 'Pakistan', 'Kuwait', 'Egypt', 'Japan', Australia', 'Qatar', 'Saudi Arabia', 'India']
+
+cmap = LinearSegmentedColormap.from_list("Custom Reds", ["#FFC080", "#8B0A1A"])
+
+#Normalize the values to [0, 1] for the colormap
+norm_values = (values - values.min()) / (values.max() - values.min())
+
+#Set up the figure
+fig, ax = plt.subplots(figsize=(15,3))
+
+#Create the heatmap as a single-row image
+ax.imshow([norm_values], cmap=cmap, aspect='auto')
+
+#Annotate each cell with its value
+for i, val in enumerate(values):
+    ax.text(i, 0, str(val), ha='center', va='center', fontsize=16, color="black")
+
+#Set x-ticks and labels
+ax.set_xticks(np.arange(len(recipients)))
+ax.set_xticklabels(recipients, ha='right', fontsize=16)
+
+#Remove y-axis labels and ticks
+ax.set_yticks([])
+ax.set_yticklabels([])
+
+#Add a title
+ax.set_title('Top Arms Importers 2020-22', fontsize=18)
+
+#Adjust layout and show the plot
+plt.tight_layout()
 fig.savefig('fig1.png')
 plt.show()
