@@ -520,3 +520,46 @@ ax.set_title('Top Arms Importers 2020-22', fontsize=18)
 plt.tight_layout()
 fig.savefig('fig1.png')
 plt.show()
+
+A WORDCLOUD
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import circlify
+from wordcloud import WordCloud
+df = pd.read_csv("arms.csv", skiprows=8, on_bad_lines="skip")
+df1 = df[["Recipient", '2020-2022']].head(10)
+df1
+df1.columns
+df1['2020-2022'] = df1['2020-2022']/1000
+df1
+df1.columns
+df1['2020-2022']
+df1['2020-2022'] = df1['2020-2022'].apply(lambda x: int(x))
+df1['2020-2022']
+df1
+
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
+
+# Define the text with the desired word frequencies
+text = " ".join([
+    "India"] * 9 + 
+    ["Saudi Arabia"] * 7 + 
+    ["Qatar"] * 6 + 
+    ["Australia"] * 3 + 
+    ["Japan"] * 3 + 
+    ["Egypt"] * 3 + 
+    ["Kuwait"] * 3 + 
+    ["Pakistan"] * 3 + 
+    ["Ukraine"] * 2 + 
+    ["South Korea"] * 2
+)
+wordcloud = WordCloud(width=800, height=400).generate(text)
+
+# Display the WordCloud
+figure = plt.figure(figsize=(10, 5))
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis('off')
+plt.savefig('my_figure.png', bbox_inches='tight', dpi=300)
+plt.show()
