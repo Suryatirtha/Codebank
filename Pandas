@@ -4,6 +4,9 @@ df the dataframe
 C: Convert Factor with levels into a dataframe pd.DataFrame(df["Factor"].value_counts()).reset_index(0)
 C: Check data df.dtypes; df.info(); nan_counts = df.isnull().sum(); df.columns; df.unique()
 D: Describe Data df.describe(); sns.boxplot(y="column_name", data=df)
+Duplicate columns: df.drop_duplicates(subset='column_name', keep='first')
 G: plt.grid(True, linestyle='--', alpha=0.5); plt.grid(axis='y', linestyle='--', alpha=0.5)  # Display only horizontal grid lines
+P: Filtering by Columns: df = df[["Column1", "Column2"]
 S: Sort values df.sort_values("column")
+Strings: How to find strings df[df["Dataset"].str.contains("string")]; df = df[df["Dataset"].str.contains(r'\bstring\b')] 
 T: Turn series into dataframe pd.DataFrame(Series).reset_index()
