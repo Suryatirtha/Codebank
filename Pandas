@@ -1,7 +1,8 @@
 import pandas as pd
 import numpy as np
 df the dataframe
-C: Convert Factor with levels into a dataframe pd.DataFrame(df["Factor"].value_counts()).reset_index(0)
+C: Convert text to numbers: df["Columns"=1]
+Convert Factor with levels into a dataframe pd.DataFrame(df["Factor"].value_counts()).reset_index(0)
 C: Check data df.dtypes; df.info(); nan_counts = df.isnull().sum(); df.columns; df.unique()
 D: Describe Data df.describe(); sns.boxplot(y="column_name", data=df)
 Duplicate columns: df.drop_duplicates(subset='column_name', keep='first')
