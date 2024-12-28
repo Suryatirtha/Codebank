@@ -1,0 +1,15 @@
+THE HEADLINE CHART
+import pandas as pd
+import matplotlib.pyplot as plt
+df=pd.read_csv("india-news-headlines.csv")
+df=df[df["headline_text"].str.contains(r'\bPM\b')]
+df = df[["publish_date", "headline_text"]]
+df = df.drop_duplicates(subset='headline_text', keep='first')
+df["headline_text"] = 1
+df['publish_date'] = pd.to_datetime(df['publish_date'], format='%Y%m%d')
+df_grouped = df.groupby(pd.Grouper(key='publish_date', freq='6M'))['headline_text'].sum().reset_index()
+df_grouped
+plt.title("The number of times the word PM appears\n in the headlines of Indian newspapers")
+plt.plot(df_grouped["publish_date"], df_grouped["headline_text"])
+plt.grid(True, linestyle='--', alpha=0.5); plt.grid(axis='y', linestyle='--', alpha=0.5)
+plt.savefig('my_figure.png', bbox_inches='tight', dpi=300)
