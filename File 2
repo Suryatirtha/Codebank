@@ -13,3 +13,44 @@ plt.title("The number of times the word PM appears\n in the headlines of Indian 
 plt.plot(df_grouped["publish_date"], df_grouped["headline_text"])
 plt.grid(True, linestyle='--', alpha=0.5); plt.grid(axis='y', linestyle='--', alpha=0.5)
 plt.savefig('my_figure.png', bbox_inches='tight', dpi=300)
+
+THE HEADLINE CHART WITH MULTIPLE ELEMENTS
+
+import pandas as pd
+import matplotlib.pyplot as plt
+df=pd.read_csv("india-news-headlines.csv")
+df_pm = df[df["headline_text"].str.contains(r'\bPM\b')]
+df_modi = df[df["headline_text"].str.contains(r'\bModi\b')]
+df_mamata = df[df["headline_text"].str.contains(r'\bMamata\b')]
+#print(df_pm)
+#print(df_modi)
+df_pm =  df_pm[["publish_date", "headline_text"]]
+df_modi =df_modi[["publish_date", "headline_text"]]
+df_mamata =df_mamata[["publish_date", "headline_text"]]
+#print(df_pm)
+#print(df_modi)
+df_pm = df_pm.drop_duplicates(subset='headline_text', keep='first')
+df_modi = df_modi.drop_duplicates(subset='headline_text', keep='first')
+df_mamata = df_mamata.drop_duplicates(subset='headline_text', keep='first')
+#print(df_pm)
+#print(df_modi)
+df_pm["headline_text"] = 1
+df_modi["headline_text"] = 1
+df_mamata["headline_text"] = 1
+#print(df_pm)
+#print(df_modi)
+df_pm['publish_date'] = pd.to_datetime(df_pm['publish_date'], format='%Y%m%d')
+df_modi['publish_date'] = pd.to_datetime(df_modi['publish_date'], format='%Y%m%d')
+df_mamata['publish_date'] = pd.to_datetime(df_mamata['publish_date'], format='%Y%m%d')
+#print(df_pm)
+#print(df_modi)
+df_pm_grouped = df_pm.groupby(pd.Grouper(key='publish_date', freq='6M'))['headline_text'].sum().reset_index()
+df_modi_grouped = df_modi.groupby(pd.Grouper(key='publish_date', freq='6M'))['headline_text'].sum().reset_index()
+df_mamata_grouped = df_mamata.groupby(pd.Grouper(key='publish_date', freq='6M'))['headline_text'].sum().reset_index()
+#print(df_pm_grouped)
+#print(df_modi_grouped)
+plt.title("Headlines with the name of our leaders")
+plt.plot(df_pm_grouped["publish_date"], df_pm_grouped["headline_text"], label= "PM headlines")
+plt.plot(df_modi_grouped["publish_date"], df_modi_grouped["headline_text"], label= "Modi headlines")
+plt.plot(df_mamata_grouped["publish_date"], df_mamata_grouped["headline_text"], label= "Mamata headlines")
+plt.legend()
