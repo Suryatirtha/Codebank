@@ -1,1 +1,2 @@
 FOR TREE MAPS: !pip install squarify
+FOR HOVERING: !pip install mplcursors
