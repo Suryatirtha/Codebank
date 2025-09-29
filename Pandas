@@ -1,6 +1,16 @@
-import pandas as pd
-import numpy as np
-df the dataframe
+DF import
+df=pd.read_csv("filename.csv")
+# Delete rows: df= pd.read_csv("filename,csv", skiprows=2, on_bad_lines="skip")
+#Delete semi-colon variables: df=pd.read_csv(""filename.csv", sep =';')
+--------------
+CHECK Data Types
+df.dtypes 
+df.info();
+df.isnull().sum()
+df.unique()
+df.columns 
+df.unique()
+
 C: Convert into DateTime format: df["Present time format"] = pd.to_datetime(df["Present time format"], format = %Y%m%d)
 Convert text to numbers: df["Columns"=1]
 Convert Factor with levels into a dataframe pd.DataFrame(df["Factor"].value_counts()).reset_index(0)
