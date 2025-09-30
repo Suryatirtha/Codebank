@@ -10,7 +10,27 @@ df.isnull().sum()
 df.unique()
 df.columns 
 df.unique()
-
+-----------------
+SELECTING Rows & Columns
+df=df.iloc[1:98] #Row selection
+df= df.iloc[:, :7]#column selection
+# Adding rows
+new_rows = df.loc[[28, 30, 31, 38]]
+new_rows
+df1 = pd.concat([df1, new_rows], ignore_index=True)
+-------------------------
+RENAME Columns
+df.columns
+old_columns = ['Heatwaves Southeast (15° E–30° E/39° N–46° N, 1950–2024)',
+       'Unnamed: 1', 'Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4', 'Unnamed: 5',
+       'Unnamed: 6']
+new_columns = df.iloc[0].tolist()
+column_mapping = dict(zip(old_columns, new_columns))
+df.rename(columns=column_mapping, inplace=True)
+------------------------------------------------
+CHANGING DTYPES
+df1['Mean area'] = pd.to_numeric(df1['Mean area'], errors='coerce')
+df1 = df1.dropna(subset=['Mean area', 'Duration', 'Mean anomaly_mid', 'Ranking'])
 C: Convert into DateTime format: df["Present time format"] = pd.to_datetime(df["Present time format"], format = %Y%m%d)
 Convert text to numbers: df["Columns"=1]
 Convert Factor with levels into a dataframe pd.DataFrame(df["Factor"].value_counts()).reset_index(0)
