@@ -1,1 +1,4 @@
-
+SCATTERPLOT with four attributes
+plt.scatter(df1['Duration'], df1['Mean anomaly_mid'], 
+            s=df1['Mean area'] * scale_factor, 
+            c=df1['Ranking'], cmap='Greys')
