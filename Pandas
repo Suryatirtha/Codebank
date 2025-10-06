@@ -9,7 +9,6 @@ df.info();
 df.isnull().sum()
 df.unique()
 df.columns 
-df.unique()
 -----------------
 SELECTING Rows & Columns
 df=df.iloc[1:98] #Row selection
