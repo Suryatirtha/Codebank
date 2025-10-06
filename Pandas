@@ -18,6 +18,7 @@ new_rows = df.loc[[28, 30, 31, 38]]
 new_rows
 df1 = pd.concat([df1, new_rows], ignore_index=True)
 df1[['Year', 'Value']].reset_index()
+Filtering by row: df1 = df[df["Indicator Name"] == 'Electricity production from coal sources (% of total)']
 -------------------------
 RENAME Columns
 df.columns
