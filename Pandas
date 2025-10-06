@@ -30,6 +30,7 @@ df.rename(columns=column_mapping, inplace=True)
 ------------------------------------------------
 CHANGING DTYPES
 df1['Mean area'] = pd.to_numeric(df1['Mean area'], errors='coerce')
+df1['Value'] = df1['Value'].apply(lambda x: round(x, 2)) #Decimal Point changes
 df1 = df1.dropna(subset=['Mean area', 'Duration', 'Mean anomaly_mid', 'Ranking'])
 C: Convert into DateTime format: df["Present time format"] = pd.to_datetime(df["Present time format"], format = %Y%m%d)
 Convert text to numbers: df["Columns"=1]
