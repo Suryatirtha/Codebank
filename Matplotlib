@@ -1,3 +1,5 @@
+#Area below line chart plt.fill_between(x, 21.5, y, alpha=0.3)
+
 SCATTERPLOT with four attributes
 plt.scatter(df1['Duration'], df1['Mean anomaly_mid'], 
             s=df1['Mean area'] * scale_factor, 
