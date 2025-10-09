@@ -28,6 +28,7 @@ old_columns = ['Heatwaves Southeast (15° E–30° E/39° N–46° N, 1950–202
 new_columns = df.iloc[0].tolist()
 column_mapping = dict(zip(old_columns, new_columns))
 df.rename(columns=column_mapping, inplace=True)
+#Two decimal points: df2['Value'] = df2['Value'].apply(lambda x: round(x, 2))
 ------------------------------------------------
 CHANGING DTYPES
 df1['Mean area'] = pd.to_numeric(df1['Mean area'], errors='coerce')
