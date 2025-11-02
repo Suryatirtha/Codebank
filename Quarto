@@ -6,3 +6,7 @@ format:
     echo: false      # Hides all code blocks by default
 jupyter: python3
 ---
+C:\Users\chang> cd C:\Users\chang\Documents\Data
+
+C:\Users\chang\Documents\Data>quarto render Quarto1.ipynb
+-----
