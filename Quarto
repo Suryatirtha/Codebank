@@ -1,0 +1,8 @@
+---
+title: "First Time"
+format:
+  html:
+    code-fold: false # Removes the "Code" toggle link
+    echo: false      # Hides all code blocks by default
+jupyter: python3
+---
